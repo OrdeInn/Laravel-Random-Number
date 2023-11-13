@@ -24,7 +24,7 @@ class GiveNumber extends Command
      *
      * @var string
      */
-    protected $description = 'Give a random number between the minimum and maximum values';
+    protected $description = 'Outputs numbers between the minimum and maximum values';
 
     /**
      * Execute the console command.
@@ -33,17 +33,17 @@ class GiveNumber extends Command
     {
         $this->validateNumericArgs($this->argument('min'), $this->argument('max'));
 
-        $min = $this->argument('min');
-        $max = $this->argument('max');
+        $min = (int) $this->argument('min');
+        $max = (int) $this->argument('max');
 
         $this->validateRange($min, $max);
 
-        $randomInt = rand($min, $max);
-
-        $this->info($randomInt);    
+        for ($i = $min; $i <= $max; $i++) {
+            $this->info($i);
+        }
     }
 
-    public function validateNumericArgs($min, $max) 
+    private function validateNumericArgs($min, $max) 
     {
         if (!is_numeric($min) || !is_numeric($max)) {
             $this->error('The range values must be numeric');
@@ -51,7 +51,7 @@ class GiveNumber extends Command
         }
     }
 
-    public function validateRange($min, $max) 
+    private function validateRange($min, $max) 
     {
         if ($min < self::ACCEPTABE_MIN_VALUE) {
             $this->error('The minimum value must be at least ' . self::ACCEPTABE_MIN_VALUE);

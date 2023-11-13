@@ -8,10 +8,9 @@ app:give-number
 
 # Usage
 It accepts 2 numeric arguments: min(Default: 1) and max(Default: INT_MAX).
-Returns a random integer within the range. 
+Returns all the integers within the range. 
 
 ```bash
-# returns '108'
 php artisan app:give-number 45 999
 ```
 
